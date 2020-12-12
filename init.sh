@@ -52,8 +52,19 @@ git checkout ${BRANCH}
 bundle install
 yarn install --check-files
 rails db:drop && rails db:create && rails db:migrate
+if test ! $? -eq 0 then 
+  tput bel
+  echo "Failed to create database. Check if server is running or check usrename and password in config/database.yml"
+  echo "If DB is down, try sudo service postgresql start"
+  exit
+fi
 
 git checkout -b test
 git remote add new_origin ${THIS_REPO_URL}
 git pull new_origin master --allow-unrelated-histories
+if test ! $? -eq 0 then 
+  tput bel
+  echo "Test pull failed. Check for conflicts."
+  exit
+fi
 bundle install
