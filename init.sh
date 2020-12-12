@@ -15,3 +15,17 @@
 
 # run bundle install
 
+REPO=''
+THIS_REPO_URL=''
+ROR_1_BUILDING_WITH_ACTIVE_RECORD='https://gitlab.com/microverse/guides/code_review/code_review_tests/building_with_active_record_test'
+ROR_2_FORMS='https://gitlab.com/microverse/guides/code_review/code_review_tests/forms_test'
+ROR_3_AUTHENTICATION=''
+ROR_4_ASSOCIATIONS='https://gitlab.com/microverse/guides/code_review/code_review_tests/associations_test'
+ROR_5_FINAL_PROJECT=''
+
+git clone ${REPO}
+
+git checkout -b test
+git remote add new_origin ${THIS_REPO_URL}
+git pull new_origin master --allow-unrelated-histories
+bundle install
