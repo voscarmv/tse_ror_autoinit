@@ -15,7 +15,9 @@
 
 # run bundle install
 
+TYPE=''
 REPO=''
+BRANCH=''
 THIS_REPO_URL=''
 ROR_1_BUILDING_WITH_ACTIVE_RECORD='https://gitlab.com/microverse/guides/code_review/code_review_tests/building_with_active_record_test'
 ROR_2_FORMS='https://gitlab.com/microverse/guides/code_review/code_review_tests/forms_test'
@@ -23,7 +25,33 @@ ROR_3_AUTHENTICATION=''
 ROR_4_ASSOCIATIONS='https://gitlab.com/microverse/guides/code_review/code_review_tests/associations_test'
 ROR_5_FINAL_PROJECT=''
 
+# Options processing (improve with getopts)
+
+TYPE=${1}
+REPO=${2}
+BRANCH=${3}
+
+case ${TYPE} in
+  1)
+    THIS_REPO_URL=${ROR_1_BUILDING_WITH_ACTIVE_RECORD}
+  ;;
+  2)
+    THIS_REPO_URL=${ROR_2_FORMS}
+  ;;
+  4)
+    THIS_REPO_URL=${ROR_4_ASSOCIATIONS}
+  ;;
+esac
+
+#
+
+REPO_DIR=`echo ${REPO} | sed 's/.*\///'`
 git clone ${REPO}
+cd ${REPO_DIR}
+git checkout ${BRANCH}
+bundle install
+yarn install --check-files
+rails db:drop && rails db:create && rails db:migrate
 
 git checkout -b test
 git remote add new_origin ${THIS_REPO_URL}
