@@ -15,6 +15,21 @@
 
 # run bundle install
 
+# Example usage:
+
+#   ./init.sh 4 https://github.com/karmaester/Private-Events feature
+
+# The first argument is the type of project (from the list below)
+  # 1 BUILDING_WITH_ACTIVE_RECORD
+  # 2 FORMS
+  # 3 AUTHENTICATION
+  # 4 ASSOCIATIONS
+
+# The second argument is the repo URL
+
+# The third argument is the name of the branch from the student's pull request.
+
+
 TYPE=''
 REPO=''
 BRANCH=''
